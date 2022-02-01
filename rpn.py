@@ -14,6 +14,8 @@ def calculate(operator):
 
 def evaluate(input_str, startover):
     try:
+        if input_str == 'q':
+            raise EOFError
         if startover == True:
             stack.clear()
         for token in input_str.split():
@@ -26,7 +28,9 @@ def evaluate(input_str, startover):
                 # Upon valid number: Add it to the stack
                 stack.append(float(token))
         if len(stack) >= 1:
-            return stack[-1]           
+            return stack[-1]
+    except EOFError:
+        raise EOFError            
     except ZeroDivisionError:
         return 'ZeroDivisionError'           
     except:                  
